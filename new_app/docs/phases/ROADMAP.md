@@ -406,6 +406,10 @@ Seed data should intentionally contain patterns that the application can detect:
 
 # Phase 5 — Build the Finance Engine
 
+**Status:** Complete. Deterministic finance functions and focused unit tests are implemented independently of the UI and database queries. Work stops at Phase 5.
+
+See [Phase 5 completion notes](PHASE_5.md) for contracts, assumptions, validation, and limitations.
+
 ## Objective
 
 Create deterministic functions for all financial calculations.

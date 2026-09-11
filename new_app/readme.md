@@ -4,7 +4,7 @@ An MVP planned to analyze synthetic transactions, explain spending, and generate
 
 ## Current status
 
-The Phase 2 frontend implements Overview, Transactions, Insights, and Goals from the Google Stitch references. It uses a shared responsive layout, reusable components, and typed September 2026 fixtures. The frontend does not query a database, run a finance engine, or call AI. This delivery stops at Phase 2.
+Phases 1–5 are implemented: the responsive frontend, Prisma data model, synthetic seed script, and deterministic finance engine. The frontend still uses Phase 2 mock fixtures; dashboard integration begins in Phase 6. Work stops at Phase 5. See [Phase 5 notes](docs/phases/PHASE_5.md) for finance contracts and limitations.
 
 The [roadmap](docs/phases/ROADMAP.md) is the source of truth for phase numbering and scope.
 
@@ -35,7 +35,7 @@ Optional environment template: copy `.env.example` to `.env` (`Copy-Item .env.ex
 | `npm run build` | Create the production build |
 | `npm start` | Serve the production build |
 
-Vitest covers shadcn class composition, combined mock-ledger filters, selection retention, and consistent date/currency formatting. Finance-engine tests belong to later phases.
+Vitest covers shadcn class composition, mock-ledger filters, selection retention, date/currency formatting, and 20 finance-engine tests for calculations and edge cases.
 
 ## Exploring the frontend
 
@@ -57,7 +57,7 @@ Mock interactions reset on reload. Disabled actions identify later functionality
 app/                  Pages, root layout, global CSS; API directory reserved
 components/           Feature directories and shadcn/ui primitives
 lib/                  UI utilities, typed mock fixtures, and separate feature modules
-prisma/               SQLite configuration and seed placeholder
+prisma/               SQLite schema, migrations, and synthetic seed script
 public/               Locally served Inter font and its OFL license
 tests/                Vitest tests
 docs/                 Architecture, design references, and roadmap
@@ -67,7 +67,7 @@ shadcn/ui uses source components rather than a runtime `shadcn-ui` package. Add 
 
 The frontend keeps route files focused on composition. Shared page framing lives in `components/common`, accessible primitives in `components/ui`, and page-specific components in their feature directories. `lib/mock` supplies typed presentation data through props. Charts and interactive controls use client boundaries; static layout and insight content stay server-rendered. Inter is served locally, so running and building the frontend does not request Google Fonts.
 
-Prisma's `db:generate`, `db:migrate`, and `db:studio` scripts are reserved for Phase 3, after models are defined. No database client is used at runtime. The seed file is a placeholder; a working seed command belongs to Phase 4.
+For local synthetic data, configure `.env`, run `npm run db:generate`, `npm run db:migrate`, and `npm run db:seed`. Seeding clears existing transactions, budgets, and goals. The seed currently uses random values, so each run can differ. The frontend is not yet connected to the database. The finance engine accepts Prisma-shaped records without querying SQLite.
 
 Financial calculations must be deterministic application code. AI will only explain supplied results. Only synthetic data is in scope.
 
