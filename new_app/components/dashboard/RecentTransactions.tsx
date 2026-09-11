@@ -1,5 +1,3 @@
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { MerchantAvatar } from "@/components/transactions/MerchantAvatar";
 import type { MockTransaction } from "@/lib/mock/types";
@@ -16,23 +14,15 @@ export const RecentTransactions: React.FC<RecentTransactionsProps> = ({
       <div>
         <h2 className="font-semibold">Recent Transactions</h2>
         <p className="mt-1 text-xs text-muted-foreground">
-          Sample activity across demo accounts
+          Latest activity recorded in SQLite
         </p>
       </div>
-      <Link
-        href="/transactions"
-        className="flex min-h-11 items-center gap-2 text-xs font-medium"
-      >
-        View all transactions
-        <ArrowRight size={14} aria-hidden="true" />
-      </Link>
     </div>
     <ul className="divide-y">
       {transactions.map((transaction) => (
         <li key={transaction.id}>
-          <Link
-            href={`/transactions?selected=${transaction.id}`}
-            className="flex items-center gap-3 rounded-lg py-4 transition-colors hover:bg-muted"
+          <div
+            className="flex items-center gap-3 rounded-lg py-4"
           >
             <MerchantAvatar
               initials={transaction.initials}
@@ -54,7 +44,7 @@ export const RecentTransactions: React.FC<RecentTransactionsProps> = ({
                 {formatDate(transaction.date)}
               </p>
             </div>
-          </Link>
+          </div>
         </li>
       ))}
     </ul>

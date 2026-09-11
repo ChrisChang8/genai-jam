@@ -29,7 +29,7 @@ export const SpendingChart: React.FC<SpendingChartProps> = ({ series }) => {
           <h2 className="font-semibold">Spending Overview</h2>
           <p className="mt-1 text-xs text-muted-foreground">
             {period === "Month"
-              ? "Cumulative monthly pace compared with August"
+              ? "Cumulative spending compared with the previous month"
               : "Monthly spending compared with the preceding period"}
           </p>
         </div>

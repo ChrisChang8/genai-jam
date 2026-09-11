@@ -479,6 +479,10 @@ Output:
 
 # Phase 6 — Connect Real Calculations to the Dashboard
 
+**Status:** Complete. Overview uses SQLite-backed finance calculations, charts, recent activity, and loading/error/empty states. Work stops at Phase 6.
+
+See [Phase 6 completion notes](PHASE_6.md) for changes, data conventions, validation, and limitations.
+
 ## Objective
 
 Replace hardcoded Stitch/mock values with database-backed calculated values.

@@ -6,17 +6,19 @@ import { formatMoney } from "@/lib/mock/format";
 export interface CategoryBreakdownProps {
   categories: CategorySpending[];
   total: number;
+  period: string;
 }
 export const CategoryBreakdown: React.FC<CategoryBreakdownProps> = ({
   categories,
   total,
+  period,
 }) => (
   <Card>
     <div className="mb-6 flex justify-between gap-4">
       <div>
         <h2 className="font-semibold">Spending by Category</h2>
         <p className="mt-1 text-xs text-muted-foreground">
-          Allocation for September 2026
+          Allocation for {period}
         </p>
       </div>
       <div className="text-right">
@@ -25,6 +27,7 @@ export const CategoryBreakdown: React.FC<CategoryBreakdownProps> = ({
       </div>
     </div>
     <div className="space-y-4">
+      {categories.length === 0 && <p className="text-sm text-muted-foreground">No expenses recorded this month.</p>}
       {categories.map((category, index) => (
         <div key={category.name}>
           <div className="mb-2 flex items-center justify-between gap-2 text-xs">

@@ -8,7 +8,7 @@ export const AccountSummary: React.FC<AccountSummaryProps> = ({ accounts }) => (
   <Card>
     <div className="mb-4 flex items-center justify-between gap-2">
       <h2 className="text-sm font-medium">Demo Accounts</h2>
-      <span className="text-[10px] text-muted-foreground">Sample balances</span>
+      <span className="text-[10px] text-muted-foreground">Net recorded activity</span>
     </div>
     <ul className="space-y-3">
       {accounts.map((account) => (
