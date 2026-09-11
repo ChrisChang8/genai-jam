@@ -2,6 +2,34 @@
 
 This document explains the repository structure, conventions, and rationale behind the folder organization.
 
+## Implemented Phase 2 frontend
+
+This section describes the delivered frontend. The broader directory map and examples below also describe future work; the roadmap controls phase scope. Phase 2 introduces no backend API, database integration, financial analysis, or AI calls.
+
+### Composition and ownership
+
+- `app/` owns route composition, metadata, the local Inter font, and shared CSS tokens. Pages import fixtures and pass serializable presentation data to components.
+- `components/common/` owns the app shell, active navigation, page header, metric grid, empty state, and disabled preview actions. One header is shared across every route; navigation moves into its own row below 768px.
+- `components/ui/` owns source-based primitives: Button, Card, Badge, Input, SegmentedControl, and Progress. Feature components use those primitives rather than copying layout or control markup.
+- Feature folders own dashboard panels, the transaction experience, insights, and goals. `components/charts/` contains the Recharts renderers with text alternatives and controlled sizing.
+- `lib/mock/` owns Phase 2 presentation contracts, fixtures, display formatting, and pure ledger filtering/selection helpers. It does not depend on Prisma, AI, or the future finance engine. Do not treat these types as the database schema.
+
+### Server and client boundaries
+
+The root shell, page headers, metric groups, dashboard lists, goal cards, and insight card content are Server Components. Client boundaries are limited to active navigation, Recharts, the transaction filtering/selection controller, insight view selection, and the pacing scenario toggle. The insight view selector receives server-rendered card content as children. No global data provider or state library is needed.
+
+The transaction controller passes controlled values and callbacks to filters, table, and details. It combines merchant/account search, type, category, and inclusive date bounds. Applying filters also removes an invisible selection; reset does not resurrect a dismissed record. The optional `selected` query parameter supports links from recent activity. Details sit beside the ledger on large screens and below it on smaller screens. Closing details restores focus to the selected row.
+
+### Styling and future integration
+
+Semantic CSS/Tailwind tokens define surfaces, borders, positive accents, typography helpers, and page spacing. Local Inter files include the SIL Open Font License. Layouts use a 1380px inner content limit on wide screens, fluid grids, semantic tables, labeled controls, and keyboard focus indicators. Screenshots determine composition where the design guide's sidebar description conflicts with the exported top navigation.
+
+For later integration, replace fixture imports at the route/data boundary and adapt calculated results into the existing presentation props. Summary values, insight text, goal estimates, and chart projections are intentionally fixed examples. The partial ledger is independent of the monthly summary. Client state has no persistence. Disabled preview actions must not imply completed transfers, account syncing, or AI analysis.
+
+### Phase 2 verification
+
+Run `npm run lint`, `npm run typecheck`, `npm test`, and `npm run build`. The mock tests cover combined filters, empty results, inclusive/open date bounds, resets, selection cleanup, and stable amount/date formatting. Browser acceptance includes all four routes at 375px, 768px, and 1440px; chart rendering; keyboard focus; navigation; filter/selection flows; insight tabs; and pacing scenarios. See the Phase 2 completion notes for results.
+
 ---
 
 ## Folder Structure Overview
@@ -50,10 +78,7 @@ app/
 - Shared layout logic in `layout.tsx`
 - Page-specific logic stays in page components; reusable logic moves to `components/`
 
-**Next Steps (Phase 2):**
-- Implement `layout.tsx` with navigation, theme provider, error boundaries
-- Create `page.tsx` for each main page (dashboard, transactions, insights, goals)
-- Set up basic API routes for fetching transaction data
+**Phase 2:** Shared layout/navigation and all four page routes are implemented. A theme provider is unnecessary for the light-only design. API routes and database-backed data fetching are deferred to later phases.
 
 ---
 
@@ -150,11 +175,7 @@ export const SummaryCards: React.FC<SummaryCardsProps> = ({
 };
 ```
 
-**Next Steps (Phase 1):**
-- Translate UI mockups from Google Stitch into React components
-- Build dashboard layout and summary cards first
-- Create transaction list component with mock data
-- Implement navigation between pages
+**Phase 2:** Google Stitch mockups, dashboard summaries, mock transaction components, and navigation are implemented. See the current frontend section above for the actual component ownership and client boundaries.
 
 ---
 

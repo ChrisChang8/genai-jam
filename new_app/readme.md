@@ -4,7 +4,7 @@ An MVP planned to analyze synthetic transactions, explain spending, and generate
 
 ## Current status
 
-Phase 1 — Scaffold the Application is implemented. The app includes a landing page and placeholder routes for Transactions, Insights, and Goals. Phase 2 and later phases have not been implemented: there is no dashboard design, data model, seeded data, finance engine, or AI integration yet.
+The Phase 2 frontend implements Overview, Transactions, Insights, and Goals from the Google Stitch references. It uses a shared responsive layout, reusable components, and typed September 2026 fixtures. The frontend does not query a database, run a finance engine, or call AI. This delivery stops at Phase 2.
 
 The [roadmap](docs/phases/ROADMAP.md) is the source of truth for phase numbering and scope.
 
@@ -18,7 +18,7 @@ npm install
 npm run dev
 ```
 
-Open [localhost:3000](http://localhost:3000). No database setup or API key is required for Phase 1.
+Open [localhost:3000](http://localhost:3000). No database setup or API key is required to run the Phase 2 frontend.
 
 Optional environment template: copy `.env.example` to `.env` (`Copy-Item .env.example .env` in PowerShell). Prisma CLI and Next.js both read `.env`; local environment files are ignored by Git. The SQLite URL is relative to `prisma/schema.prisma`.
 
@@ -35,7 +35,16 @@ Optional environment template: copy `.env.example` to `.env` (`Copy-Item .env.ex
 | `npm run build` | Create the production build |
 | `npm start` | Serve the production build |
 
-The initial test verifies shadcn class composition and the Vitest path alias. Finance tests will arrive with the finance engine.
+Vitest covers shadcn class composition, combined mock-ledger filters, selection retention, and consistent date/currency formatting. Finance-engine tests belong to later phases.
+
+## Exploring the frontend
+
+- **Overview:** Financial summary, spending comparison (Month / 3M / 6M), category allocation, recent transaction links, recommendations, and demo accounts.
+- **Transactions:** Search merchants/accounts, combine type/category/date filters, reset filters, and select a row for details. Recent transaction links preselect that record. Filtering a selected record out clears its details.
+- **Insights:** Four illustrative insight cards, a dining chart, and Active/Archived views; the archived sample is empty.
+- **Goals:** Two savings goals, progress indicators, and a pacing toggle that switches between fixed illustrative scenarios and milestone dates.
+
+Mock interactions reset on reload. Disabled actions identify later functionality, including record changes, exports, transfers, applying plans, and historical analysis. Summary figures describe the full illustrative month; the eleven-row sample ledger is not their source. Goal dates and recommendations reproduce the design scenarios and are not calculated forecasts.
 
 ## Architecture and tooling
 
@@ -47,18 +56,24 @@ The initial test verifies shadcn class composition and the Vitest path alias. Fi
 ```text
 app/                  Pages, root layout, global CSS; API directory reserved
 components/           Feature directories and shadcn/ui primitives
-lib/                  UI utility; finance, ai, db, validation directories reserved
+lib/                  UI utilities, typed mock fixtures, and separate feature modules
 prisma/               SQLite configuration and seed placeholder
-public/               Static assets (reserved)
+public/               Locally served Inter font and its OFL license
 tests/                Vitest tests
 docs/                 Architecture, design references, and roadmap
 ```
 
 shadcn/ui uses source components rather than a runtime `shadcn-ui` package. Add components with `npx shadcn@latest add <component>`; configuration lives in `components.json`.
 
+The frontend keeps route files focused on composition. Shared page framing lives in `components/common`, accessible primitives in `components/ui`, and page-specific components in their feature directories. `lib/mock` supplies typed presentation data through props. Charts and interactive controls use client boundaries; static layout and insight content stay server-rendered. Inter is served locally, so running and building the frontend does not request Google Fonts.
+
 Prisma's `db:generate`, `db:migrate`, and `db:studio` scripts are reserved for Phase 3, after models are defined. No database client is used at runtime. The seed file is a placeholder; a working seed command belongs to Phase 4.
 
 Financial calculations must be deterministic application code. AI will only explain supplied results. Only synthetic data is in scope.
+
+## Phase 2 validation
+
+ESLint, TypeScript, all nine Vitest tests, and the production build pass. Browser checks passed on all four pages at 375px, 768px, and 1440px, including combined filters, empty states, transaction selection, chart tabs, insight tabs, the pacing toggle, keyboard focus, and mobile navigation. The final browser pass reported no console or page errors and no horizontal overflow. See [Phase 2 completion notes](docs/phases/PHASE_2.md) for details and the exact scope boundary.
 
 ## Phase 1 validation and limitations
 

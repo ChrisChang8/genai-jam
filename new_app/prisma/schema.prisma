@@ -7,4 +7,96 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Domain models and migrations are intentionally deferred to Phase 3.
+// ===== ENUMS =====
+
+/// Transaction type enumeration for income vs. expense classification.
+enum TransactionType {
+  INCOME
+  EXPENSE
+}
+
+/// Transaction category enumeration for grouping and analysis.
+/// Defines eight fixed categories for MVP; dynamic categories deferred to Phase 5.
+enum TransactionCategory {
+  HOUSING
+  FOOD_AND_DINING
+  TRANSPORTATION
+  SHOPPING
+  ENTERTAINMENT
+  SUBSCRIPTIONS
+  INCOME
+  OTHER
+}
+
+/// Goal priority enumeration for ranking and sorting goals.
+enum GoalPriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+/// Goal status enumeration for filtering active, paused, and completed goals.
+enum GoalStatus {
+  ACTIVE
+  PAUSED
+  COMPLETED
+}
+
+// ===== MODELS =====
+
+/// Transaction model for recording income and expense entries.
+/// Amounts follow sign convention: positive for income, negative for expense.
+/// Dates are stored in UTC; time component present but granularity is date-only for analytics.
+/// Account names are freeform strings; no Account master table in Phase 3.
+model Transaction {
+  id          Int      @id @default(autoincrement())
+  merchant    String   /// Merchant or transaction source name (e.g., "Chipotle", "Salary Deposit")
+  amount      Decimal  /// Signed decimal: positive for income, negative for expense
+  date        DateTime /// Transaction date in UTC; financial calculations use date-only granularity
+  category    String   /// Category reference (enum value from TransactionCategory)
+  type        String   /// Transaction type: INCOME or EXPENSE (enum value from TransactionType)
+  account     String   /// Freeform account name (e.g., "Chase Sapphire", "Checking - Wells Fargo")
+  description String?  /// Optional description or memo for the transaction
+  isRecurring Boolean  @default(false) /// Manual flag for recurring transactions (salary, rent, subscriptions)
+  createdAt   DateTime @default(now()) /// Record creation timestamp; immutable audit field
+  updatedAt   DateTime @updatedAt /// Record modification timestamp; auto-updated on changes
+
+  @@index([date])
+  @@index([category])
+  @@index([type])
+}
+
+/// Budget model for defining monthly spending limits by category.
+/// One budget per category; enforced at application layer.
+/// Amounts are positive values representing monthly spending caps.
+model Budget {
+  id           Int      @id @default(autoincrement())
+  category     String   /// Category reference (enum value from TransactionCategory)
+  monthlyLimit Decimal  /// Monthly spending limit; positive value
+  createdAt    DateTime @default(now()) /// Record creation timestamp; immutable audit field
+  updatedAt    DateTime @updatedAt /// Record modification timestamp; auto-updated on changes
+
+  @@unique([category]) /// Enforce one budget per category at database level
+  @@index([category])
+}
+
+/// Goal model for tracking savings targets and financial objectives.
+/// Amounts are positive values: targetAmount (goal) and currentAmount (progress).
+/// Status and priority support filtering, sorting, and user experience features.
+model Goal {
+  id            Int      @id @default(autoincrement())
+  name          String   /// Goal name (e.g., "Emergency Fund", "Vacation")
+  description   String?  /// Optional detailed description of the goal
+  targetAmount  Decimal  /// Target amount to save; positive value
+  currentAmount Decimal  @default(0) /// Amount accumulated toward goal; positive value, defaults to zero
+  targetDate    DateTime /// Target completion date for the goal
+  priority      String   @default("MEDIUM") /// Goal priority: LOW, MEDIUM (default), or HIGH (enum value from GoalPriority)
+  status        String   @default("ACTIVE") /// Goal status: ACTIVE (default), PAUSED, or COMPLETED (enum value from GoalStatus)
+  createdAt     DateTime @default(now()) /// Record creation timestamp; immutable audit field
+  updatedAt     DateTime @updatedAt /// Record modification timestamp; auto-updated on changes
+
+  @@index([status])
+  @@index([priority])
+  @@index([targetDate])
+}
+

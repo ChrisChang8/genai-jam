@@ -154,7 +154,9 @@ Confirm the initial working feature set:
 # Phase 1 — Scaffold the Application
 
 **Status:** Complete. Next.js scaffold and tooling are implemented in `new_app/`.
-Phase 2 and subsequent phases remain unimplemented.
+The frontend implementation is documented separately under Phase 2 below.
+
+See [Phase 1 completion notes](PHASE_1.md) for changes, verification results, and known limitations.
 
 ## Objective
 
@@ -224,6 +226,10 @@ new app/
 ---
 
 # Phase 2 — Translate the Google Stitch Design
+
+**Status:** Complete. The four responsive pages, shared components, and focused mock interactions are implemented. This frontend delivery stops at Phase 2; it does not include subsequent phases.
+
+See [Phase 2 completion notes](PHASE_2.md) for architecture decisions, changes, validation, and mock-data limitations.
 
 ## Objective
 
