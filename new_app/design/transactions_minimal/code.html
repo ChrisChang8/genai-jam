@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FinCopilot - Transactions Ledger</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "canvas-neutral": "#fafafa",
+            "border-hairline": "#e5e7eb",
+            "border-subtle": "#f3f4f6",
+            "mint-vibrant": "#10b981",
+            "mint-surface": "#ecfdf5",
+            "slate-text-muted": "#6b7280"
+          },
+          fontFamily: {
+            sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    @layer base {
+      html, body { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background-color: #ffffff; color: #000000; }
+      body { overscroll-behavior: none; }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+</head>
+<body class="bg-white text-black antialiased selection:bg-black selection:text-white">
+<!-- Top Minimalist Uber-Inspired Navigation Bar -->
+<header class="fixed top-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-b border-border-hairline">
+<div class="h-16 w-full max-w-[1400px] mx-auto px-6 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<!-- Logo -->
+<a class="flex items-center gap-2 text-black hover:opacity-80 transition-opacity" href="#">
+<span class="w-8 h-8 rounded-lg bg-black text-white flex items-center justify-center font-bold text-[15px] tracking-tight">F</span>
+<span class="font-semibold text-[17px] tracking-tight text-black">FinCopilot</span>
+</a>
+<!-- Segmented Navigation -->
+<nav class="hidden md:flex items-center bg-[#f3f4f6] p-1 rounded-full text-[13px] font-medium">
+<a class="px-4 py-1.5 rounded-full text-slate-text-muted hover:text-black transition-colors" href="#">Overview</a>
+<a class="px-4 py-1.5 rounded-full bg-white text-black shadow-sm font-semibold" href="#">Transactions</a>
+<a class="px-4 py-1.5 rounded-full text-slate-text-muted hover:text-black transition-colors" href="#">Insights</a>
+<a class="px-4 py-1.5 rounded-full text-slate-text-muted hover:text-black transition-colors" href="#">Goals</a>
+</nav>
+</div>
+<!-- Right Utility Section -->
+<div class="flex items-center gap-3">
+<button class="hidden sm:flex items-center gap-1.5 bg-[#f9fafb] hover:bg-[#f3f4f6] border border-border-hairline px-3.5 py-1.5 rounded-full text-[13px] font-medium text-black transition-colors" type="button">
+<span class="material-symbols-outlined text-[17px] text-gray-500">calendar_today</span>
+<span>September 2026</span>
+<span class="material-symbols-outlined text-[16px] text-gray-400">expand_more</span>
+</button>
+<button class="p-2 rounded-full hover:bg-border-subtle text-black transition-colors relative" title="Notifications" type="button">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-2 right-2 w-1.5 h-1.5 rounded-full bg-black"></span>
+</button>
+<div class="h-4 w-[1px] bg-border-hairline mx-1"></div>
+<div class="flex items-center gap-2.5 pl-1">
+<img alt="Chris M." class="w-8 h-8 rounded-full object-cover ring-1 ring-border-hairline" src="https://lh3.googleusercontent.com/aida/AEtjO1UIVmpCR2fbf9ojctYS8Z07qht-WmVJ6wnecD6zh7dB17gFae71wTkpeHjS0AfkGKfjTyM3VaR-bTgQ3CE8LejJaqgn7sKxzey4f3O8P9AvJBs2cZVtbhxIOvW7xvcchOPHvKNQI8rYupyMgk_c8k4MEuRhB2a7vOy8feBzzuKLtQ7_9MrUi4ucEpzQ5ZouwB_9pdxRIQub2LMXKU2ptHB1H-3IDueskUBWhiu1NqlVPM8OWw7WbpRi7A"/>
+<div class="hidden lg:flex flex-col text-left">
+<span class="text-[13px] font-semibold text-black leading-tight">Chris M.</span>
+<span class="text-[11px] text-gray-500 font-medium">Pro</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Container -->
+<main class="w-full max-w-[1400px] mx-auto pt-24 pb-16 px-6">
+<div class="flex flex-col gap-6">
+<!-- Header & Quick Cashflow Ticker -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 pb-4 border-b border-border-hairline">
+<div>
+<h1 class="text-3xl font-bold tracking-tight text-black">Transactions</h1>
+<p class="text-[14px] text-gray-500 mt-1">Direct ledger stream synced across connected accounts.</p>
+</div>
+<!-- Metrics Badge requested: Inflow: +$5,700.00 | Outflow: -$3,140.00 | Net: +$2,560.00 -->
+<div class="inline-flex flex-wrap items-center bg-[#f9fafb] border border-border-hairline rounded-full px-4 py-2 text-[13px] gap-3 self-start lg:self-auto">
+<div class="flex items-center gap-1.5">
+<span class="text-gray-500 font-medium">Inflow:</span>
+<span class="font-semibold text-emerald-600">+$5,700.00</span>
+</div>
+<span class="text-gray-300">|</span>
+<div class="flex items-center gap-1.5">
+<span class="text-gray-500 font-medium">Outflow:</span>
+<span class="font-semibold text-black">-$3,140.00</span>
+</div>
+<span class="text-gray-300">|</span>
+<div class="flex items-center gap-1.5">
+<span class="text-gray-500 font-medium">Net:</span>
+<span class="font-semibold text-emerald-600">+$2,560.00</span>
+</div>
+</div>
+</div>
+<!-- Controls & Filter Toolbar -->
+<div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 pt-1">
+<!-- Search -->
+<div class="relative flex-1 max-w-md">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-[18px]">search</span>
+<input class="w-full bg-[#f9fafb] hover:bg-[#f3f4f6] focus:bg-white border border-border-hairline focus:border-black rounded-full pl-10 pr-4 py-2 text-[13px] text-black placeholder:text-gray-400 focus:outline-none transition-colors" id="transactionSearch" placeholder="Search transactions, merchants, accounts..." type="text"/>
+</div>
+<!-- Filter Pills & Dropdowns -->
+<div class="flex flex-wrap items-center gap-2">
+<!-- Type Tabs -->
+<div class="flex items-center bg-[#f3f4f6] p-1 rounded-full text-[12px] font-medium">
+<button class="px-3.5 py-1 rounded-full bg-white text-black shadow-sm font-semibold">All</button>
+<button class="px-3.5 py-1 rounded-full text-gray-600 hover:text-black transition-colors">Income</button>
+<button class="px-3.5 py-1 rounded-full text-gray-600 hover:text-black transition-colors">Expenses</button>
+</div>
+<!-- Category dropdown -->
+<button class="flex items-center gap-1.5 bg-white border border-border-hairline hover:border-gray-400 px-3.5 py-1.5 rounded-full text-[13px] text-black font-medium transition-colors">
+<span>Category</span>
+<span class="material-symbols-outlined text-[16px] text-gray-400">expand_more</span>
+</button>
+<!-- Date picker -->
+<button class="flex items-center gap-1.5 bg-white border border-border-hairline hover:border-gray-400 px-3.5 py-1.5 rounded-full text-[13px] text-black font-medium transition-colors">
+<span class="material-symbols-outlined text-[15px] text-gray-400">calendar_month</span>
+<span>Date Range</span>
+<span class="material-symbols-outlined text-[16px] text-gray-400">expand_more</span>
+</button>
+<!-- Export / Add -->
+<div class="flex items-center gap-2 ml-auto md:ml-0">
+<button class="p-2 rounded-full border border-border-hairline hover:bg-border-subtle text-black transition-colors" title="Export CSV">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+<button class="flex items-center gap-1 bg-black text-white px-4 py-2 rounded-full text-[13px] font-medium hover:bg-neutral-800 transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>Add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Main Content Grid: Ledger Table + Selected Slide-over Drawer -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pt-2">
+<!-- Minimalist Transaction List/Table -->
+<div class="lg:col-span-8 flex flex-col border border-border-hairline rounded-2xl overflow-hidden bg-white">
+<!-- Table Header -->
+<div class="grid grid-cols-12 px-6 py-3 bg-[#fafafa] border-b border-border-hairline text-[11px] font-semibold tracking-wider uppercase text-gray-500">
+<span class="col-span-5">Merchant</span>
+<span class="hidden sm:block sm:col-span-3">Category</span>
+<span class="col-span-4 sm:col-span-2">Date &amp; Account</span>
+<span class="col-span-3 sm:col-span-2 text-right">Amount</span>
+</div>
+<!-- Transaction Rows -->
+<div class="divide-y divide-border-hairline" id="transactionList">
+<!-- Costco Wholesale -->
+<div class="transaction-row grid grid-cols-12 px-6 py-4 items-center cursor-pointer hover:bg-canvas-neutral transition-colors group" onclick="selectTransaction('Costco Wholesale', '-$83.42', 'Groceries', 'Today, 2:15 PM', 'Chase Sapphire ··4821', 'POS Debit', 'shopping_cart', 'Bi-weekly bulk grocery purchase. Matches routine household run.')">
+<div class="col-span-5 flex items-center gap-3.5 min-w-0 pr-2">
+<div class="w-10 h-10 rounded-full bg-[#f3f4f6] text-black flex items-center justify-center font-semibold text-[13px] shrink-0 border border-border-hairline">
+                  CW
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="text-[14px] font-semibold text-black truncate group-hover:text-black">Costco Wholesale</span>
+<span class="text-[12px] text-gray-400 truncate">Chase Sapphire ··4821</span>
+</div>
+</div>
+<div class="hidden sm:flex sm:col-span-3 items-center">
+<span class="bg-[#f3f4f6] text-gray-700 px-2.5 py-0.5 rounded-full text-[12px] font-medium">Groceries</span>
+</div>
+<div class="col-span-4 sm:col-span-2 text-[12px] text-gray-500">
+                Today, 2:15 PM
+              </div>
+<div class="col-span-3 sm:col-span-2 text-right">
+<span class="text-[14px] font-semibold text-black tracking-tight">-$83.42</span>
+</div>
+</div>
+<!-- Shell Oil -->
+<div class="transaction-row grid grid-cols-12 px-6 py-4 items-center cursor-pointer hover:bg-canvas-neutral transition-colors group" onclick="selectTransaction('Shell Oil', '-$51.73', 'Transportation', 'Yesterday, 8:40 AM', 'Apple Card ··1092', 'Fuel / Travel', 'local_gas_station', 'Routine weekly fuel stop during morning commute.')">
+<div class="col-span-5 flex items-center gap-3.5 min-w-0 pr-2">
+<div class="w-10 h-10 rounded-full bg-[#f3f4f6] text-black flex items-center justify-center font-semibold text-[13px] shrink-0 border border-border-hairline">
+                  SO
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="text-[14px] font-semibold text-black truncate group-hover:text-black">Shell Oil</span>
+<span class="text-[12px] text-gray-400 truncate">Apple Card ··1092</span>
+</div>
+</div>
+<div class="hidden sm:flex sm:col-span-3 items-center">
+<span class="bg-[#f3f4f6] text-gray-700 px-2.5 py-0.5 rounded-full text-[12px] font-medium">Transportation</span>
+</div>
+<div class="col-span-4 sm:col-span-2 text-[12px] text-gray-500">
+                Yesterday, 8:40 AM
+              </div>
+<div class="col-span-3 sm:col-span-2 text-right">
+<span class="text-[14px] font-semibold text-black tracking-tight">-$51.73</span>
+</div>
+</div>
+<!-- Equinox Fitness -->
+<div class="transaction-row grid grid-cols-12 px-6 py-4 items-center cursor-pointer hover:bg-canvas-neutral transition-colors group" onclick="selectTransaction('Equinox Fitness', '-$260.00', 'Health &amp; Fitness', 'Sep 12, 2026', 'Chase Sapphire ··4821', 'Membership Recurring', 'fitness_center', 'Monthly fitness membership charge on schedule.')">
+<div class="col-span-5 flex items-center gap-3.5 min-w-0 pr-2">
+<div class="w-10 h-10 rounded-full bg-[#f3f4f6] text-black flex items-center justify-center font-semibold text-[13px] shrink-0 border border-border-hairline">
+                  EQ
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="text-[14px] font-semibold text-black truncate group-hover:text-black">Equinox Fitness</span>
+<span class="text-[12px] text-gray-400 truncate">Chase Sapphire ··4821</span>
+</div>
+</div>
+<div class="hidden sm:flex sm:col-span-3 items-center">
+<span class="bg-[#f3f4f6] text-gray-700 px-2.5 py-0.5 rounded-full text-[12px] font-medium">Health &amp; Fitness</span>
+</div>
+<div class="col-span-4 sm:col-span-2 text-[12px] text-gray-500">
+                Sep 12, 2026
+              </div>
+<div class="col-span-3 sm:col-span-2 text-right">
+<span class="text-[14px] font-semibold text-black tracking-tight">-$260.00</span>
+</div>
+</div>
+<!-- Fidelity Payroll (Positive Inflow in Crisp Mint Green) -->
+<div class="transaction-row grid grid-cols-12 px-6 py-4 items-center cursor-pointer hover:bg-emerald-50/40 bg-emerald-50/20 transition-colors group" onclick="selectTransaction('Fidelity Payroll', '+$2,850.00', 'Income', 'Sep 9, 2026', 'Fidelity Checking ··9301', 'Direct Deposit ACH', 'account_balance', 'Bi-weekly employer direct deposit.')">
+<div class="col-span-5 flex items-center gap-3.5 min-w-0 pr-2">
+<div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-semibold text-[13px] shrink-0 border border-emerald-200">
+                  FP
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="text-[14px] font-semibold text-black truncate">Fidelity Payroll</span>
+<span class="text-[12px] text-emerald-700 font-medium truncate">Direct Deposit · Checking ··9301</span>
+</div>
+</div>
+<div class="hidden sm:flex sm:col-span-3 items-center">
+<span class="bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded-full text-[12px] font-medium">Income</span>
+</div>
+<div class="col-span-4 sm:col-span-2 text-[12px] text-gray-500">
+                Sep 9, 2026
+              </div>
+<div class="col-span-3 sm:col-span-2 text-right">
+<span class="text-[14px] font-bold text-emerald-600 tracking-tight">+$2,850.00</span>
+</div>
+</div>
+<!-- Chipotle (Active Selected by Default) -->
+<div class="transaction-row grid grid-cols-12 px-6 py-4 items-center cursor-pointer bg-neutral-100/80 transition-colors group" id="row-chipotle" onclick="selectTransaction('Chipotle Mexican Grill', '-$14.28', 'Food &amp; Dining', 'Sep 8, 2026, 12:44 PM', 'Chase Sapphire ··4821', 'Point of Sale', 'lunch_dining', 'Visited 3 times this month, within normal budget.')">
+<div class="col-span-5 flex items-center gap-3.5 min-w-0 pr-2">
+<div class="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center font-semibold text-[13px] shrink-0">
+                  CM
+                </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<span class="text-[14px] font-semibold text-black truncate">Chipotle Mexican Grill</span>
+<span class="w-1.5 h-1.5 rounded-full bg-black"></span>
+</div>
+<span class="text-[12px] text-gray-400 truncate">Chase Sapphire ··4821</span>
+</div>
+</div>
+<div class="hidden sm:flex sm:col-span-3 items-center">
+<span class="bg-white border border-border-hairline text-gray-800 px-2.5 py-0.5 rounded-full text-[12px] font-medium">Food &amp; Dining</span>
+</div>
+<div class="col-span-4 sm:col-span-2 text-[12px] text-gray-500">
+                Sep 8, 2026
+              </div>
+<div class="col-span-3 sm:col-span-2 text-right">
+<span class="text-[14px] font-semibold text-black tracking-tight">-$14.28</span>
+</div>
+</div>
+<!-- Netflix Premium -->
+<div class="transaction-row grid grid-cols-12 px-6 py-4 items-center cursor-pointer hover:bg-canvas-neutral transition-colors group" onclick="selectTransaction('Netflix Premium', '-$19.99', 'Subscriptions', 'Sep 7, 2026', 'Apple Card ··1092', 'Digital Recurring', 'live_tv', 'Standard monthly entertainment streaming charge.')">
+<div class="col-span-5 flex items-center gap-3.5 min-w-0 pr-2">
+<div class="w-10 h-10 rounded-full bg-[#f3f4f6] text-black flex items-center justify-center font-semibold text-[13px] shrink-0 border border-border-hairline">
+                  NF
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="text-[14px] font-semibold text-black truncate">Netflix Premium</span>
+<span class="text-[12px] text-gray-400 truncate">Apple Card ··1092</span>
+</div>
+</div>
+<div class="hidden sm:flex sm:col-span-3 items-center">
+<span class="bg-[#f3f4f6] text-gray-700 px-2.5 py-0.5 rounded-full text-[12px] font-medium">Subscriptions</span>
+</div>
+<div class="col-span-4 sm:col-span-2 text-[12px] text-gray-500">
+                Sep 7, 2026
+              </div>
+<div class="col-span-3 sm:col-span-2 text-right">
+<span class="text-[14px] font-semibold text-black tracking-tight">-$19.99</span>
+</div>
+</div>
+<!-- Whole Foods Market -->
+<div class="transaction-row grid grid-cols-12 px-6 py-4 items-center cursor-pointer hover:bg-canvas-neutral transition-colors group" onclick="selectTransaction('Whole Foods Market', '-$68.14', 'Groceries', 'Sep 10, 2026', 'Apple Card ··1092', 'Store Purchase', 'storefront', 'Fresh grocery supplies within weekly target.')">
+<div class="col-span-5 flex items-center gap-3.5 min-w-0 pr-2">
+<div class="w-10 h-10 rounded-full bg-[#f3f4f6] text-black flex items-center justify-center font-semibold text-[13px] shrink-0 border border-border-hairline">
+                  WF
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="text-[14px] font-semibold text-black truncate">Whole Foods Market</span>
+<span class="text-[12px] text-gray-400 truncate">Apple Card ··1092</span>
+</div>
+</div>
+<div class="hidden sm:flex sm:col-span-3 items-center">
+<span class="bg-[#f3f4f6] text-gray-700 px-2.5 py-0.5 rounded-full text-[12px] font-medium">Groceries</span>
+</div>
+<div class="col-span-4 sm:col-span-2 text-[12px] text-gray-500">
+                Sep 10, 2026
+              </div>
+<div class="col-span-3 sm:col-span-2 text-right">
+<span class="text-[14px] font-semibold text-black tracking-tight">-$68.14</span>
+</div>
+</div>
+<!-- Uber Technologies -->
+<div class="transaction-row grid grid-cols-12 px-6 py-4 items-center cursor-pointer hover:bg-canvas-neutral transition-colors group" onclick="selectTransaction('Uber Technologies', '-$32.40', 'Transportation', 'Sep 4, 2026', 'Apple Card ··1092', 'Rideshare Trip', 'local_taxi', 'City rideshare during evening transit hours.')">
+<div class="col-span-5 flex items-center gap-3.5 min-w-0 pr-2">
+<div class="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center font-semibold text-[13px] shrink-0">
+                  UB
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="text-[14px] font-semibold text-black truncate">Uber Technologies</span>
+<span class="text-[12px] text-gray-400 truncate">Apple Card ··1092</span>
+</div>
+</div>
+<div class="hidden sm:flex sm:col-span-3 items-center">
+<span class="bg-[#f3f4f6] text-gray-700 px-2.5 py-0.5 rounded-full text-[12px] font-medium">Transportation</span>
+</div>
+<div class="col-span-4 sm:col-span-2 text-[12px] text-gray-500">
+                Sep 4, 2026
+              </div>
+<div class="col-span-3 sm:col-span-2 text-right">
+<span class="text-[14px] font-semibold text-black tracking-tight">-$32.40</span>
+</div>
+</div>
+<!-- Sweetgreen -->
+<div class="transaction-row grid grid-cols-12 px-6 py-4 items-center cursor-pointer hover:bg-canvas-neutral transition-colors group" onclick="selectTransaction('Sweetgreen', '-$18.50', 'Food &amp; Dining', 'Sep 5, 2026', 'Chase Sapphire ··4821', 'POS Dining', 'nutrition', 'Lunch pickup, consistent with typical monthly dining pattern.')">
+<div class="col-span-5 flex items-center gap-3.5 min-w-0 pr-2">
+<div class="w-10 h-10 rounded-full bg-[#f3f4f6] text-black flex items-center justify-center font-semibold text-[13px] shrink-0 border border-border-hairline">
+                  SG
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="text-[14px] font-semibold text-black truncate">Sweetgreen</span>
+<span class="text-[12px] text-gray-400 truncate">Chase Sapphire ··4821</span>
+</div>
+</div>
+<div class="hidden sm:flex sm:col-span-3 items-center">
+<span class="bg-[#f3f4f6] text-gray-700 px-2.5 py-0.5 rounded-full text-[12px] font-medium">Food &amp; Dining</span>
+</div>
+<div class="col-span-4 sm:col-span-2 text-[12px] text-gray-500">
+                Sep 5, 2026
+              </div>
+<div class="col-span-3 sm:col-span-2 text-right">
+<span class="text-[14px] font-semibold text-black tracking-tight">-$18.50</span>
+</div>
+</div>
+<!-- Blue Bottle Coffee -->
+<div class="transaction-row grid grid-cols-12 px-6 py-4 items-center cursor-pointer hover:bg-canvas-neutral transition-colors group" onclick="selectTransaction('Blue Bottle Coffee', '-$6.75', 'Food &amp; Dining', 'Sep 3, 2026', 'Chase Sapphire ··4821', 'Cafe POS', 'local_cafe', 'Morning coffee expense.')">
+<div class="col-span-5 flex items-center gap-3.5 min-w-0 pr-2">
+<div class="w-10 h-10 rounded-full bg-[#f3f4f6] text-black flex items-center justify-center font-semibold text-[13px] shrink-0 border border-border-hairline">
+                  BB
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="text-[14px] font-semibold text-black truncate">Blue Bottle Coffee</span>
+<span class="text-[12px] text-gray-400 truncate">Chase Sapphire ··4821</span>
+</div>
+</div>
+<div class="hidden sm:flex sm:col-span-3 items-center">
+<span class="bg-[#f3f4f6] text-gray-700 px-2.5 py-0.5 rounded-full text-[12px] font-medium">Food &amp; Dining</span>
+</div>
+<div class="col-span-4 sm:col-span-2 text-[12px] text-gray-500">
+                Sep 3, 2026
+              </div>
+<div class="col-span-3 sm:col-span-2 text-right">
+<span class="text-[14px] font-semibold text-black tracking-tight">-$6.75</span>
+</div>
+</div>
+<!-- Apple iCloud Storage -->
+<div class="transaction-row grid grid-cols-12 px-6 py-4 items-center cursor-pointer hover:bg-canvas-neutral transition-colors group" onclick="selectTransaction('Apple iCloud Storage', '-$2.99', 'Subscriptions', 'Sep 1, 2026', 'Apple Card ··1092', 'Cloud Services', 'cloud', 'Recurring monthly digital storage subscription.')">
+<div class="col-span-5 flex items-center gap-3.5 min-w-0 pr-2">
+<div class="w-10 h-10 rounded-full bg-[#f3f4f6] text-black flex items-center justify-center font-semibold text-[13px] shrink-0 border border-border-hairline">
+                  AP
+                </div>
+<div class="flex flex-col min-w-0">
+<span class="text-[14px] font-semibold text-black truncate">Apple iCloud Storage</span>
+<span class="text-[12px] text-gray-400 truncate">Apple Card ··1092</span>
+</div>
+</div>
+<div class="hidden sm:flex sm:col-span-3 items-center">
+<span class="bg-[#f3f4f6] text-gray-700 px-2.5 py-0.5 rounded-full text-[12px] font-medium">Subscriptions</span>
+</div>
+<div class="col-span-4 sm:col-span-2 text-[12px] text-gray-500">
+                Sep 1, 2026
+              </div>
+<div class="col-span-3 sm:col-span-2 text-right">
+<span class="text-[14px] font-semibold text-black tracking-tight">-$2.99</span>
+</div>
+</div>
+</div>
+<!-- Minimalist Pagination Footer -->
+<div class="px-6 py-3.5 bg-[#fafafa] border-t border-border-hairline flex items-center justify-between text-[13px] text-gray-500">
+<span>Showing 11 of 48 transactions</span>
+<div class="flex items-center gap-1">
+<button class="p-1 rounded hover:bg-border-hairline transition-colors disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<span class="px-2 text-black font-medium">Page 1 of 4</span>
+<button class="p-1 rounded hover:bg-border-hairline transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Clean Slide-over Side Drawer / Receipt Detail Panel -->
+<div class="lg:col-span-4 sticky top-24" id="detailSideSheet">
+<div class="bg-white border border-border-hairline rounded-2xl p-6 flex flex-col gap-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+<!-- Drawer Header -->
+<div class="flex items-center justify-between pb-3 border-b border-border-hairline">
+<span class="text-[11px] font-semibold uppercase tracking-wider text-gray-400">Transaction Details</span>
+<button class="p-1 text-gray-400 hover:text-black rounded-full transition-colors" onclick="clearSelection()" title="Close details">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- Receipt Hero -->
+<div class="flex flex-col items-center text-center">
+<div class="w-14 h-14 rounded-full bg-black text-white flex items-center justify-center font-bold text-[18px] mb-3" id="detailAvatar">
+                CM
+              </div>
+<h2 class="text-xl font-bold tracking-tight text-black" id="detailMerchant">Chipotle Mexican Grill</h2>
+<div class="mt-1 flex items-baseline">
+<span class="text-3xl font-bold tracking-tight text-black" id="detailAmount">-$14.28</span>
+</div>
+<div class="flex items-center gap-1.5 mt-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="text-[12px] font-medium text-emerald-600">Cleared</span>
+<span class="text-gray-300 text-xs">·</span>
+<span class="text-[12px] text-gray-500 font-normal" id="detailType">Point of Sale</span>
+</div>
+</div>
+<!-- Receipt Metadata Rows -->
+<div class="bg-[#f9fafb] border border-border-hairline rounded-xl p-4 flex flex-col gap-3 text-[13px]">
+<div class="flex items-center justify-between">
+<span class="text-gray-500">Date</span>
+<span class="font-medium text-black" id="detailDate">Sep 8, 2026, 12:44 PM</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-gray-500">Account</span>
+<span class="font-medium text-black" id="detailAccount">Chase Sapphire ··4821</span>
+</div>
+<div class="flex items-center justify-between pt-1 border-t border-border-hairline">
+<span class="text-gray-500">Category</span>
+<div class="flex items-center gap-1.5">
+<span class="font-medium text-black" id="detailCategory">Food &amp; Dining</span>
+<!-- Easy change dropdown pill -->
+<button class="flex items-center text-gray-500 hover:text-black transition-colors" title="Change category">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Calm Spending Context Box -->
+<div class="bg-[#f9fafb] border border-border-hairline rounded-xl p-4">
+<span class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider block mb-1.5">Spending Context</span>
+<p class="text-[13px] text-gray-700 leading-relaxed font-normal" id="detailAiContext">
+                Visited 3 times this month, within normal budget.
+              </p>
+</div>
+<!-- Quiet Utilitarian Actions -->
+<div class="flex flex-col gap-2 pt-1">
+<button class="w-full bg-[#f3f4f6] hover:bg-neutral-200 text-black py-2.5 px-4 rounded-xl text-[13px] font-medium flex items-center justify-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[17px] text-gray-500">call_split</span>
+<span>Split transaction</span>
+</button>
+<button class="w-full bg-[#f3f4f6] hover:bg-neutral-200 text-black py-2.5 px-4 rounded-xl text-[13px] font-medium flex items-center justify-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[17px] text-gray-500">visibility_off</span>
+<span>Exclude from budget</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+    function selectTransaction(merchant, amount, category, date, account, type, icon, context) {
+      document.querySelectorAll('.transaction-row').forEach(row => {
+        row.classList.remove('bg-neutral-100/80', 'ring-1', 'ring-black/10');
+      });
+      event.currentTarget.classList.add('bg-neutral-100/80');
+
+      document.getElementById('detailMerchant').textContent = merchant;
+      document.getElementById('detailAmount').textContent = amount;
+      document.getElementById('detailCategory').textContent = category;
+      document.getElementById('detailDate').textContent = date;
+      document.getElementById('detailAccount').textContent = account;
+      document.getElementById('detailType').textContent = type;
+      document.getElementById('detailAiContext').textContent = context;
+
+      // Extract initials for circular monogram
+      const initials = merchant.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+      const avatarEl = document.getElementById('detailAvatar');
+      avatarEl.textContent = initials;
+
+      const isPositive = amount.startsWith('+');
+      const amountEl = document.getElementById('detailAmount');
+      if (isPositive) {
+        amountEl.classList.remove('text-black');
+        amountEl.classList.add('text-emerald-600');
+        avatarEl.classList.remove('bg-black', 'text-white');
+        avatarEl.classList.add('bg-emerald-100', 'text-emerald-700');
+      } else {
+        amountEl.classList.remove('text-emerald-600');
+        amountEl.classList.add('text-black');
+        avatarEl.classList.remove('bg-emerald-100', 'text-emerald-700');
+        avatarEl.classList.add('bg-black', 'text-white');
+      }
+    }
+
+    function clearSelection() {
+      document.querySelectorAll('.transaction-row').forEach(row => {
+        row.classList.remove('bg-neutral-100/80');
+      });
+    }
+
+    document.getElementById('transactionSearch')?.addEventListener('input', function(e) {
+      const term = e.target.value.toLowerCase();
+      document.querySelectorAll('.transaction-row').forEach(row => {
+        const text = row.textContent.toLowerCase();
+        row.style.display = text.includes(term) ? 'grid' : 'none';
+      });
+    });
+  </script>
+</body></html>

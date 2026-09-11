@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Savings Goals — FinCopilot</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', sans-serif;
+      }
+      body {
+        overscroll-behavior: none;
+      }
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              black: "#000000",
+              dark: "#111827",
+              subtle: "#6B7280",
+              border: "#E5E7EB",
+              bg: "#F9FAFB",
+              card: "#FFFFFF",
+              mint: "#10B981",
+              "mint-subtle": "#ECFDF5",
+              "mint-dark": "#047857"
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#F9FAFB] text-[#111827] antialiased min-h-screen">
+<!-- Minimal Top Navigation -->
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-[#E5E7EB]">
+<div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<!-- Logo -->
+<a class="flex items-center gap-2.5" href="#">
+<div class="w-8 h-8 rounded-lg bg-black text-white flex items-center justify-center font-bold text-sm tracking-tight">
+            FC
+          </div>
+<span class="font-semibold text-[17px] tracking-tight text-black">FinCopilot</span>
+</a>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center gap-1">
+<a class="px-3 py-1.5 rounded-lg text-sm text-[#6B7280] hover:text-black hover:bg-[#F3F4F6] transition-colors font-medium" href="#">Overview</a>
+<a class="px-3 py-1.5 rounded-lg text-sm text-[#6B7280] hover:text-black hover:bg-[#F3F4F6] transition-colors font-medium" href="#">Transactions</a>
+<a class="px-3 py-1.5 rounded-lg text-sm text-[#6B7280] hover:text-black hover:bg-[#F3F4F6] transition-colors font-medium" href="#">Insights</a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-black bg-[#F3F4F6]" href="#">Goals</a>
+</nav>
+</div>
+<!-- Right Header Actions -->
+<div class="flex items-center gap-4">
+<button class="hidden sm:flex items-center gap-1.5 text-sm text-[#6B7280] hover:text-black transition-colors font-medium py-1 px-2.5 rounded-lg hover:bg-[#F3F4F6]" type="button">
+<span>September 2026</span>
+<span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+<button class="p-2 text-[#6B7280] hover:text-black hover:bg-[#F3F4F6] rounded-full transition-colors relative" type="button">
+<span class="material-symbols-outlined text-[20px] block">notifications</span>
+<span class="absolute top-2 right-2 w-1.5 h-1.5 rounded-full bg-black"></span>
+</button>
+<div class="flex items-center gap-2.5 pl-2 border-l border-[#E5E7EB]">
+<img alt="Chris M." class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1UIVmpCR2fbf9ojctYS8Z07qht-WmVJ6wnecD6zh7dB17gFae71wTkpeHjS0AfkGKfjTyM3VaR-bTgQ3CE8LejJaqgn7sKxzey4f3O8P9AvJBs2cZVtbhxIOvW7xvcchOPHvKNQI8rYupyMgk_c8k4MEuRhB2a7vOy8feBzzuKLtQ7_9MrUi4ucEpzQ5ZouwB_9pdxRIQub2LMXKU2ptHB1H-3IDueskUBWhiu1NqlVPM8OWw7WbpRi7A"/>
+<span class="text-sm font-medium text-black hidden sm:inline-block">Chris M.</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="max-w-6xl mx-auto px-6 py-10">
+<!-- Page Header -->
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-8 border-b border-[#E5E7EB]">
+<div>
+<h1 class="text-3xl font-bold tracking-tight text-black">Savings Goals</h1>
+<p class="text-[#6B7280] text-sm sm:text-base mt-1.5">Manage your financial targets with disciplined pacing and projected milestones.</p>
+</div>
+<button class="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-black hover:bg-neutral-800 text-white rounded-lg text-sm font-medium transition-colors shadow-sm self-start sm:self-auto" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+        New Goal
+      </button>
+</div>
+<!-- High-level Progress Row -->
+<section class="py-8 grid grid-cols-2 md:grid-cols-4 gap-6 border-b border-[#E5E7EB]">
+<div>
+<span class="text-xs font-medium text-[#6B7280] uppercase tracking-wider">Total Saved</span>
+<div class="mt-2 text-2xl font-bold tracking-tight text-black">$8,200</div>
+<p class="text-xs text-[#6B7280] mt-0.5">Across all active funds</p>
+</div>
+<div>
+<span class="text-xs font-medium text-[#6B7280] uppercase tracking-wider">Aggregated Target</span>
+<div class="mt-2 text-2xl font-bold tracking-tight text-black">$13,000</div>
+<p class="text-xs text-[#6B7280] mt-0.5">$4,800 remaining</p>
+</div>
+<div>
+<span class="text-xs font-medium text-[#6B7280] uppercase tracking-wider">Monthly Inflow</span>
+<div class="mt-2 text-2xl font-bold tracking-tight text-black">$1,100<span class="text-sm font-normal text-[#6B7280]">/mo</span></div>
+<p class="text-xs text-[#6B7280] mt-0.5">Scheduled deposits</p>
+</div>
+<div>
+<span class="text-xs font-medium text-[#6B7280] uppercase tracking-wider">System Status</span>
+<div class="mt-2.5 flex items-center">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#ECFDF5] text-[#047857]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span>
+            All Goals on Track
+          </span>
+</div>
+<p class="text-xs text-[#6B7280] mt-1.5">No pacing shortfalls</p>
+</div>
+</section>
+<!-- 2 Primary Goal Cards Side-by-Side -->
+<section class="py-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Goal 1: Emergency Fund -->
+<div class="bg-white border border-[#E5E7EB] rounded-xl p-6 sm:p-7 flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between">
+<div>
+<span class="text-xs font-semibold text-[#10B981] uppercase tracking-wider">Essential Target</span>
+<h2 class="text-xl font-bold text-black tracking-tight mt-0.5">Emergency Fund</h2>
+<p class="text-xs text-[#6B7280] mt-1">Marcus High-Yield Savings • 4.4% APY</p>
+</div>
+<span class="text-xs font-medium text-[#6B7280] bg-[#F3F4F6] px-2.5 py-1 rounded-md">6 months reserve</span>
+</div>
+<!-- Figures & Percentage -->
+<div class="mt-7 flex items-baseline justify-between">
+<div class="flex items-baseline gap-1.5">
+<span class="text-3xl font-bold tracking-tight text-black">$6,800</span>
+<span class="text-sm text-[#6B7280] font-normal">of $10,000</span>
+</div>
+<span class="text-sm font-semibold text-[#10B981]">68%</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full bg-[#F3F4F6] h-2 rounded-full mt-2.5 overflow-hidden">
+<div class="bg-[#10B981] h-full rounded-full" style="width: 68%;"></div>
+</div>
+</div>
+<!-- Sub-details Footer -->
+<div class="mt-8 pt-5 border-t border-[#F3F4F6] flex items-center justify-between text-xs text-[#6B7280]">
+<div>
+<span class="text-[#9CA3AF] block font-medium">Monthly Pace</span>
+<span class="text-black font-semibold text-sm mt-0.5 block">$650 / mo</span>
+</div>
+<div class="text-right">
+<span class="text-[#9CA3AF] block font-medium">Est. Completion</span>
+<span class="text-black font-semibold text-sm mt-0.5 block">Jan 2027 <span class="text-[#6B7280] font-normal">(4 mos left)</span></span>
+</div>
+</div>
+</div>
+<!-- Goal 2: Tokyo & Kyoto Trip -->
+<div class="bg-white border border-[#E5E7EB] rounded-xl p-6 sm:p-7 flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between">
+<div>
+<span class="text-xs font-semibold text-[#6B7280] uppercase tracking-wider">Lifestyle &amp; Travel</span>
+<h2 class="text-xl font-bold text-black tracking-tight mt-0.5">Tokyo &amp; Kyoto Trip</h2>
+<p class="text-xs text-[#6B7280] mt-1">Travel Vault • 0.8% APY</p>
+</div>
+<span class="text-xs font-medium text-[#6B7280] bg-[#F3F4F6] px-2.5 py-1 rounded-md">Spring 2027</span>
+</div>
+<!-- Figures & Percentage -->
+<div class="mt-7 flex items-baseline justify-between">
+<div class="flex items-baseline gap-1.5">
+<span class="text-3xl font-bold tracking-tight text-black">$1,400</span>
+<span class="text-sm text-[#6B7280] font-normal">of $3,000</span>
+</div>
+<span class="text-sm font-semibold text-[#10B981]">47%</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full bg-[#F3F4F6] h-2 rounded-full mt-2.5 overflow-hidden">
+<div class="bg-[#10B981] h-full rounded-full" style="width: 47%;"></div>
+</div>
+</div>
+<!-- Sub-details Footer -->
+<div class="mt-8 pt-5 border-t border-[#F3F4F6] flex items-center justify-between text-xs text-[#6B7280]">
+<div>
+<span class="text-[#9CA3AF] block font-medium">Monthly Pace</span>
+<span class="text-black font-semibold text-sm mt-0.5 block">$450 / mo</span>
+</div>
+<div class="text-right">
+<span class="text-[#9CA3AF] block font-medium">Est. Completion</span>
+<span class="text-black font-semibold text-sm mt-0.5 block">March 2027 <span class="text-[#6B7280] font-normal">(6 mos left)</span></span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Simple Pacing Optimizer -->
+<section class="py-6">
+<div class="bg-white border border-[#E5E7EB] rounded-xl p-6 sm:p-7">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+<div class="max-w-2xl">
+<div class="flex items-center gap-2">
+<h3 class="text-base font-bold text-black tracking-tight">Pacing Optimizer</h3>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-[#ECFDF5] text-[#047857]">Surplus available</span>
+</div>
+<p class="text-sm text-[#4B5563] mt-1.5 leading-relaxed">
+<strong class="text-black font-medium">Accelerate with Monthly Surplus:</strong> Allocating your $500 monthly dining &amp; subscription savings brings Emergency Fund completion forward from <span class="line-through text-[#9CA3AF]">Jan 2027</span> to <strong class="text-[#10B981] font-semibold">Nov 2026</strong>.
+            </p>
+</div>
+<div class="flex items-center gap-4 shrink-0">
+<!-- Simple Toggle Switch -->
+<button aria-checked="true" class="w-11 h-6 bg-black rounded-full relative transition-colors focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2" id="optimizerToggle" role="switch" type="button">
+<span class="absolute top-1 right-1 w-4 h-4 bg-white rounded-full transition-transform" id="optimizerKnob"></span>
+</button>
+<!-- Apply Action Button -->
+<button class="px-4 py-2 bg-black hover:bg-neutral-800 text-white text-xs font-medium rounded-lg transition-colors" type="button">
+              Apply to Auto-Transfers
+            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Horizontal Milestone Timeline -->
+<section class="py-8">
+<div class="bg-white border border-[#E5E7EB] rounded-xl p-6 sm:p-7">
+<div class="mb-6 flex items-center justify-between">
+<h3 class="text-sm font-bold text-black tracking-tight uppercase tracking-wider">Milestone Trajectory</h3>
+<span class="text-xs text-[#9CA3AF]">2026 – 2028</span>
+</div>
+<div class="relative">
+<!-- Horizontal Connecting Rule (desktop) -->
+<div class="hidden md:block absolute top-3.5 left-4 right-4 h-[1px] bg-[#E5E7EB]"></div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+<!-- Step 1: Achieved -->
+<div class="flex flex-col">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-7 h-7 rounded-full bg-[#10B981] text-white flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[16px] font-bold">check</span>
+</div>
+<span class="text-xs font-semibold text-[#10B981] uppercase tracking-wide">Achieved</span>
+</div>
+<div class="text-sm font-bold text-black">3-Month Safety Net</div>
+<div class="text-xs text-[#6B7280] mt-0.5">$5,000 threshold completed</div>
+</div>
+<!-- Step 2: Current Target -->
+<div class="flex flex-col">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-7 h-7 rounded-full bg-black text-white flex items-center justify-center shrink-0 ring-4 ring-[#F3F4F6]">
+<span class="w-2 h-2 rounded-full bg-white"></span>
+</div>
+<span class="text-xs font-semibold text-black uppercase tracking-wide">Current Target</span>
+</div>
+<div class="text-sm font-bold text-black">6-Month Emergency Fund</div>
+<div class="text-xs text-[#6B7280] mt-0.5">$10,000 target • Nov 2026</div>
+</div>
+<!-- Step 3: Upcoming -->
+<div class="flex flex-col">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-7 h-7 rounded-full bg-white border border-[#D1D5DB] text-[#6B7280] flex items-center justify-center shrink-0">
+<span class="w-1.5 h-1.5 rounded-full bg-[#9CA3AF]"></span>
+</div>
+<span class="text-xs font-semibold text-[#6B7280] uppercase tracking-wide">Upcoming</span>
+</div>
+<div class="text-sm font-bold text-black">Travel Fund</div>
+<div class="text-xs text-[#6B7280] mt-0.5">$3,000 target • March 2027</div>
+</div>
+<!-- Step 4: Future -->
+<div class="flex flex-col opacity-60">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-7 h-7 rounded-full bg-white border border-[#E5E7EB] text-[#9CA3AF] flex items-center justify-center shrink-0">
+<span class="w-1.5 h-1.5 rounded-full bg-[#D1D5DB]"></span>
+</div>
+<span class="text-xs font-semibold text-[#9CA3AF] uppercase tracking-wide">Future</span>
+</div>
+<div class="text-sm font-bold text-black">Home Down Payment</div>
+<div class="text-xs text-[#6B7280] mt-0.5">Wealth expansion track</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<script>
+    (function initOptimizerToggle() {
+      const toggle = document.getElementById('optimizerToggle');
+      const knob = document.getElementById('optimizerKnob');
+      let enabled = true;
+
+      if (!toggle || !knob) return;
+
+      toggle.addEventListener('click', function() {
+        enabled = !enabled;
+        if (enabled) {
+          toggle.classList.remove('bg-[#D1D5DB]');
+          toggle.classList.add('bg-black');
+          knob.classList.remove('left-1');
+          knob.classList.add('right-1');
+          toggle.setAttribute('aria-checked', 'true');
+        } else {
+          toggle.classList.remove('bg-black');
+          toggle.classList.add('bg-[#D1D5DB]');
+          knob.classList.remove('right-1');
+          knob.classList.add('left-1');
+          toggle.setAttribute('aria-checked', 'false');
+        }
+      });
+    })();
+  </script>
+</body></html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Insights — FinCopilot</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', sans-serif;
+      }
+      body {
+        overscroll-behavior: none;
+      }
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            mint: {
+              DEFAULT: "#10B981",
+              light: "#ecfdf5",
+              dark: "#059669",
+              border: "#a7f3d0"
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#FFFFFF] text-neutral-900 antialiased selection:bg-neutral-900 selection:text-white">
+<!-- Header -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur border-b border-[#E5E7EB]">
+<div class="h-16 w-full max-w-[1280px] mx-auto px-6 flex items-center justify-between">
+<!-- Brand & Navigation -->
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-2 group" href="#">
+<span class="w-7 h-7 bg-black rounded-lg flex items-center justify-center text-white text-sm font-semibold tracking-tighter">F</span>
+<span class="text-[17px] font-semibold tracking-tight text-black">FinCopilot</span>
+</a>
+<nav class="hidden md:flex items-center gap-1">
+<a class="px-3 py-1.5 text-sm font-medium text-neutral-500 hover:text-black rounded-md transition-colors" href="#">Overview</a>
+<a class="px-3 py-1.5 text-sm font-medium text-neutral-500 hover:text-black rounded-md transition-colors" href="#">Transactions</a>
+<a class="px-3 py-1.5 text-sm font-medium text-black bg-neutral-100 rounded-md transition-colors" href="#">Insights</a>
+<a class="px-3 py-1.5 text-sm font-medium text-neutral-500 hover:text-black rounded-md transition-colors" href="#">Goals</a>
+</nav>
+</div>
+<!-- Right controls -->
+<div class="flex items-center gap-4">
+<button class="hidden sm:flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-neutral-700 bg-neutral-50 hover:bg-neutral-100 border border-[#E5E7EB] rounded-lg transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px] text-neutral-500">calendar_today</span>
+<span>September 2026</span>
+<span class="material-symbols-outlined text-[16px] text-neutral-400">expand_more</span>
+</button>
+<button aria-label="Notifications" class="p-2 text-neutral-500 hover:text-black hover:bg-neutral-50 rounded-lg transition-colors relative" type="button">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-2 right-2 w-1.5 h-1.5 rounded-full bg-black"></span>
+</button>
+<div class="h-4 w-px bg-[#E5E7EB] hidden sm:block"></div>
+<div class="flex items-center gap-2.5">
+<img alt="Chris M." class="w-8 h-8 rounded-full object-cover ring-1 ring-[#E5E7EB]" src="https://lh3.googleusercontent.com/aida/AEtjO1UIVmpCR2fbf9ojctYS8Z07qht-WmVJ6wnecD6zh7dB17gFae71wTkpeHjS0AfkGKfjTyM3VaR-bTgQ3CE8LejJaqgn7sKxzey4f3O8P9AvJBs2cZVtbhxIOvW7xvcchOPHvKNQI8rYupyMgk_c8k4MEuRhB2a7vOy8feBzzuKLtQ7_9MrUi4ucEpzQ5ZouwB_9pdxRIQub2LMXKU2ptHB1H-3IDueskUBWhiu1NqlVPM8OWw7WbpRi7A"/>
+<div class="hidden lg:flex flex-col text-left">
+<span class="text-xs font-semibold text-black leading-tight">Chris M.</span>
+<span class="text-[11px] text-neutral-500 leading-tight">Pro Member</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Container -->
+<main class="w-full max-w-[1280px] mx-auto pt-28 pb-20 px-6">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between pb-8 gap-4 border-b border-[#E5E7EB]">
+<div>
+<h1 class="text-3xl font-semibold tracking-tight text-black">Insights</h1>
+<p class="text-sm text-neutral-500 mt-1">Key spending trends and monthly opportunities.</p>
+</div>
+<!-- Quiet Filter Pills -->
+<div class="flex items-center gap-1.5 bg-neutral-100 p-1 rounded-lg self-start md:self-auto border border-[#E5E7EB]">
+<button class="px-3 py-1 text-xs font-semibold bg-white text-black rounded shadow-[0_1px_2px_rgba(0,0,0,0.04)]">Active (4)</button>
+<button class="px-3 py-1 text-xs font-medium text-neutral-600 hover:text-black transition-colors rounded">Archived</button>
+<button class="px-2.5 py-1 text-xs font-medium text-neutral-600 hover:text-black transition-colors rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">tune</span>
+          Preferences
+        </button>
+</div>
+</div>
+<!-- Top Summary Strip (4 Quiet Metrics) -->
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 py-8 border-b border-[#E5E7EB]">
+<div class="p-4 rounded-xl border border-[#E5E7EB] bg-white hover:border-neutral-400 transition-colors">
+<span class="text-xs font-medium text-neutral-500 uppercase tracking-wider">Active Signals</span>
+<div class="mt-2 text-2xl font-semibold text-black tracking-tight">4</div>
+<p class="text-xs text-neutral-500 mt-1">Updated 20 minutes ago</p>
+</div>
+<div class="p-4 rounded-xl border border-[#E5E7EB] bg-white hover:border-neutral-400 transition-colors">
+<span class="text-xs font-medium text-neutral-500 uppercase tracking-wider">Potential Monthly Savings</span>
+<div class="mt-2 text-2xl font-semibold text-[#10B981] tracking-tight">+$500<span class="text-xs font-normal text-neutral-500">/mo</span></div>
+<p class="text-xs text-neutral-500 mt-1">$6,000 annualized opportunity</p>
+</div>
+<div class="p-4 rounded-xl border border-[#E5E7EB] bg-white hover:border-neutral-400 transition-colors">
+<span class="text-xs font-medium text-neutral-500 uppercase tracking-wider">Savings Rate</span>
+<div class="mt-2 text-2xl font-semibold text-black tracking-tight">44.9%</div>
+<p class="text-xs text-[#10B981] font-medium mt-1">+6.9% vs previous month</p>
+</div>
+<div class="p-4 rounded-xl border border-[#E5E7EB] bg-white hover:border-neutral-400 transition-colors">
+<span class="text-xs font-medium text-neutral-500 uppercase tracking-wider">Month Pace</span>
+<div class="mt-2 text-2xl font-semibold text-black tracking-tight">On Track</div>
+<p class="text-xs text-neutral-500 mt-1">8 days remaining in cycle</p>
+</div>
+</div>
+<!-- 2x2 Grid of Focused Insight Cards -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-8">
+<!-- Card 1: Dining Spending -->
+<div class="p-7 rounded-2xl border border-[#E5E7EB] bg-white hover:border-neutral-400 transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="text-xs font-medium text-neutral-500 uppercase tracking-wider">Discretionary</span>
+<span class="text-xs font-medium text-neutral-600 bg-neutral-100 px-2 py-0.5 rounded">Higher than usual</span>
+</div>
+<h2 class="text-xl font-semibold text-black tracking-tight">Dining Spending</h2>
+<p class="text-sm text-neutral-600 mt-2 leading-relaxed">
+            You spent <span class="font-medium text-black">$620</span> on dining this month (<span class="font-medium text-black">+$120</span> compared to last month).
+          </p>
+<!-- Minimal Bar Chart -->
+<div class="mt-6 p-4 rounded-xl bg-neutral-50 border border-[#E5E7EB]">
+<div class="flex items-end justify-between gap-4 h-24 pt-4 px-2">
+<div class="flex-1 flex flex-col items-center gap-1.5">
+<span class="text-[11px] text-neutral-500 font-medium">$110</span>
+<div class="w-full bg-neutral-200 rounded-t h-8"></div>
+<span class="text-[11px] text-neutral-400">W1</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1.5">
+<span class="text-[11px] text-neutral-500 font-medium">$140</span>
+<div class="w-full bg-neutral-200 rounded-t h-12"></div>
+<span class="text-[11px] text-neutral-400">W2</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1.5">
+<span class="text-[11px] text-neutral-500 font-medium">$165</span>
+<div class="w-full bg-neutral-300 rounded-t h-16"></div>
+<span class="text-[11px] text-neutral-400">W3</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-1.5">
+<span class="text-[11px] text-black font-semibold">$205</span>
+<div class="w-full bg-black rounded-t h-20"></div>
+<span class="text-[11px] text-black font-semibold">W4</span>
+</div>
+</div>
+</div>
+<!-- Recommendation Callout -->
+<div class="mt-4 p-3.5 rounded-xl bg-neutral-50 border border-[#E5E7EB] text-xs text-neutral-700 leading-relaxed">
+<span class="font-semibold text-black">Recommendation:</span> Setting a $105/week target keeps you under $500.
+          </div>
+</div>
+<div class="mt-6 pt-5 border-t border-[#E5E7EB] flex items-center justify-between">
+<button class="px-4 py-2 text-xs font-semibold text-white bg-black hover:bg-neutral-800 rounded-lg transition-colors">
+            Set Weekly Cap
+          </button>
+<a class="text-xs font-medium text-neutral-500 hover:text-black transition-colors" href="#">
+            View 18 charges →
+          </a>
+</div>
+</div>
+<!-- Card 2: Recurring Subscriptions -->
+<div class="p-7 rounded-2xl border border-[#E5E7EB] bg-white hover:border-neutral-400 transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="text-xs font-medium text-neutral-500 uppercase tracking-wider">Fixed Expenses</span>
+<span class="text-xs font-medium text-neutral-600 bg-neutral-100 px-2 py-0.5 rounded">7 Services</span>
+</div>
+<h2 class="text-xl font-semibold text-black tracking-tight">Recurring Subscriptions</h2>
+<p class="text-sm text-neutral-600 mt-2 leading-relaxed">
+            7 active recurring charges totaling <span class="font-semibold text-black">$135/mo</span> ($1,620/year).
+          </p>
+<!-- Clean Subscription Item List -->
+<div class="mt-5 space-y-2">
+<div class="flex items-center justify-between p-2.5 rounded-lg border border-[#E5E7EB] bg-white">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-neutral-300"></span>
+<span class="text-xs font-medium text-black">Equinox Digital</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-xs text-neutral-500">Unused in 45d</span>
+<span class="text-xs font-semibold text-black">$40.00/mo</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg border border-[#E5E7EB] bg-white">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-neutral-300"></span>
+<span class="text-xs font-medium text-black">NYTimes</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-xs text-neutral-500">Rarely read</span>
+<span class="text-xs font-semibold text-black">$15.00/mo</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg border border-[#E5E7EB] bg-white">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-neutral-200"></span>
+<span class="text-xs font-medium text-neutral-700">Netflix, Spotify, Prime, iCloud, ChatGPT</span>
+</div>
+<span class="text-xs font-medium text-neutral-600">$80.00/mo</span>
+</div>
+</div>
+<!-- Mint Green Opportunity Callout -->
+<div class="mt-4 p-3.5 rounded-xl bg-mint-light border border-mint-border text-xs text-mint-dark leading-relaxed">
+<span class="font-semibold text-neutral-900">Savings Opportunity:</span> Pause or cancel unused Equinox and NYTimes to save <span class="font-semibold text-neutral-900">$55/month</span> ($660/year).
+          </div>
+</div>
+<div class="mt-6 pt-5 border-t border-[#E5E7EB] flex items-center justify-between">
+<button class="px-4 py-2 text-xs font-semibold text-white bg-black hover:bg-neutral-800 rounded-lg transition-colors">
+            Review Subscriptions
+          </button>
+<button class="text-xs font-medium text-neutral-500 hover:text-black transition-colors">
+            Keep All Active
+          </button>
+</div>
+</div>
+<!-- Card 3: Savings Milestone -->
+<div class="p-7 rounded-2xl border border-[#E5E7EB] bg-white hover:border-neutral-400 transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="text-xs font-medium text-neutral-500 uppercase tracking-wider">Milestone</span>
+<span class="text-xs font-medium text-[#10B981] bg-mint-light px-2 py-0.5 rounded border border-mint-border">Target Met</span>
+</div>
+<h2 class="text-xl font-semibold text-black tracking-tight">Savings Milestone</h2>
+<p class="text-sm text-neutral-600 mt-2 leading-relaxed">
+            Savings rate reached <span class="font-semibold text-black">44.9%</span> this month (up from 38% in August).
+          </p>
+<!-- Minimal Progress Graphic -->
+<div class="mt-6 p-5 rounded-xl bg-neutral-50 border border-[#E5E7EB]">
+<div class="flex items-center justify-between text-xs mb-2">
+<span class="text-neutral-500 font-medium">Monthly Target: 40.0%</span>
+<span class="text-[#10B981] font-semibold">+4.9% ahead</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full bg-neutral-200 h-2.5 rounded-full overflow-hidden">
+<div class="bg-[#10B981] h-full rounded-full" style="width: 100%;"></div>
+</div>
+<div class="mt-3 flex items-center justify-between text-xs text-neutral-600">
+<span>$2,560 transferred to reserves</span>
+<span class="font-medium text-black">+$490 vs August</span>
+</div>
+</div>
+<div class="mt-4 p-3.5 rounded-xl bg-neutral-50 border border-[#E5E7EB] text-xs text-neutral-700 leading-relaxed">
+<span class="font-semibold text-black">Suggested Allocation:</span> You have a $300 surplus. Allocating this to your Emergency Fund achieves your goal 2 months earlier.
+          </div>
+</div>
+<div class="mt-6 pt-5 border-t border-[#E5E7EB] flex items-center justify-between">
+<button class="px-4 py-2 text-xs font-semibold text-white bg-black hover:bg-neutral-800 rounded-lg transition-colors">
+            Transfer Surplus to Emergency Fund
+          </button>
+<button class="text-xs font-medium text-neutral-500 hover:text-black transition-colors">
+            Dismiss
+          </button>
+</div>
+</div>
+<!-- Card 4: Weekend Spending Pattern -->
+<div class="p-7 rounded-2xl border border-[#E5E7EB] bg-white hover:border-neutral-400 transition-all flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="text-xs font-medium text-neutral-500 uppercase tracking-wider">Pattern</span>
+<span class="text-xs font-medium text-neutral-600 bg-neutral-100 px-2 py-0.5 rounded">Fri – Sun</span>
+</div>
+<h2 class="text-xl font-semibold text-black tracking-tight">Weekend Spending Pattern</h2>
+<p class="text-sm text-neutral-600 mt-2 leading-relaxed">
+<span class="font-semibold text-black">38%</span> of your discretionary spending occurs between Friday and Sunday.
+          </p>
+<!-- Clean Distribution Graphic -->
+<div class="mt-6 p-5 rounded-xl bg-neutral-50 border border-[#E5E7EB]">
+<div class="flex items-center justify-between text-xs mb-3">
+<span class="text-neutral-500 font-medium">Discretionary split</span>
+<span class="font-semibold text-black">$456 spent over 3 weekends</span>
+</div>
+<div class="flex items-center gap-1.5 h-3 rounded-full overflow-hidden">
+<div class="h-full bg-neutral-300 rounded-l-full" style="width: 62%;" title="Mon - Thu: 62%"></div>
+<div class="h-full bg-black rounded-r-full" style="width: 38%;" title="Fri - Sun: 38%"></div>
+</div>
+<div class="flex items-center justify-between text-[11px] text-neutral-500 mt-2.5">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-neutral-300"></span>
+<span>Mon – Thu (62%)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-black"></span>
+<span class="font-medium text-black">Fri – Sun (38%)</span>
+</div>
+</div>
+</div>
+<div class="mt-4 p-3.5 rounded-xl bg-neutral-50 border border-[#E5E7EB] text-xs text-neutral-700 leading-relaxed">
+<span class="font-semibold text-black">Guardrail:</span> A gentle notification on Friday afternoons can help you track social and dining budgets in real time.
+          </div>
+</div>
+<div class="mt-6 pt-5 border-t border-[#E5E7EB] flex items-center justify-between">
+<button class="px-4 py-2 text-xs font-semibold text-white bg-black hover:bg-neutral-800 rounded-lg transition-colors">
+            Set Weekend Alert
+          </button>
+<a class="text-xs font-medium text-neutral-500 hover:text-black transition-colors" href="#">
+            View breakdown →
+          </a>
+</div>
+</div>
+</div>
+<!-- Bottom Search / Ask History -->
+<div class="mt-14 pt-8 border-t border-[#E5E7EB]">
+<div class="max-w-2xl mx-auto">
+<label class="block text-xs font-medium text-neutral-500 uppercase tracking-wider mb-2 text-center" for="history-search">Historical Analysis</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3.5 text-neutral-400 text-[18px]">search</span>
+<input class="w-full pl-10 pr-24 py-2.5 bg-neutral-50 hover:bg-white focus:bg-white text-sm text-black placeholder:text-neutral-400 border border-[#E5E7EB] rounded-xl outline-none focus:border-black transition-all" id="history-search" placeholder="Search your financial history..." type="text"/>
+<button class="absolute right-1.5 px-3 py-1.5 bg-black hover:bg-neutral-800 text-white text-xs font-medium rounded-lg transition-colors">
+            Search
+          </button>
+</div>
+<div class="flex items-center justify-center gap-2 mt-3 text-xs text-neutral-500">
+<span>Common queries:</span>
+<button class="hover:text-black underline underline-offset-2" onclick="document.getElementById('history-search').value = 'Dining vs Groceries past 6 months';">Dining vs Groceries</button>
+<span>·</span>
+<button class="hover:text-black underline underline-offset-2" onclick="document.getElementById('history-search').value = 'All subscription increases in 2026';">Subscription changes</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>
