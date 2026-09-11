@@ -23,14 +23,14 @@ public class ValidateISBN {
 		{
 			if (!Character.isDigit(isbn.charAt(i))) {
 				if (i ==9 && isbn.charAt(i) == 'X') {
-					total += 10;
+					total += 10 * (SHORT_ISBN_LENGTH - i);
 				}
 				else {
 					throw new NumberFormatException("ISBN numbers can only contain numeric digits");
 				}
 			}
 			else {
-				total += isbn.charAt(i) * (SHORT_ISBN_LENGTH -i);
+				total += Character.getNumericValue(isbn.charAt(i)) * (SHORT_ISBN_LENGTH - i);
 			}
 		}
 
@@ -42,10 +42,10 @@ public class ValidateISBN {
 		
 		for (int i = 0; i < LONG_ISBN_LENGTH; i++) {
 			if (i % 2 == 0) {
-				total += isbn.charAt(i);
+				total += Character.getNumericValue(isbn.charAt(i));
 			}
 			else {
-				total += isbn.charAt(i) * 3;
+				total += Character.getNumericValue(isbn.charAt(i)) * 3;
 			}
 		}
 		return (total % LONG_ISBN_MULTIPLIER == 0);
