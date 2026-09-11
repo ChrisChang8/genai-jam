@@ -153,6 +153,9 @@ Confirm the initial working feature set:
 
 # Phase 1 — Scaffold the Application
 
+**Status:** Complete. Next.js scaffold and tooling are implemented in `new_app/`.
+Phase 2 and subsequent phases remain unimplemented.
+
 ## Objective
 
 Establish a maintainable project structure before adding business logic.

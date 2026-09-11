@@ -466,7 +466,7 @@ docs/
 │   └── understated_monochrome_mint/
 │       └── (color palette and design tokens)
 └── phases/
-    └── ROADMAP.md         # 8-phase development plan
+    └── ROADMAP.md         # phased development plan
 ```
 
 ---
@@ -545,8 +545,8 @@ prisma/dev.db
 
 ## Next Steps by Phase
 
-1. **Phase 1**: Build UI components from Stitch design
-2. **Phase 2**: Set up Next.js, Tailwind, shadcn/ui
+1. **Phase 2**: Build UI components from Stitch design
+2. **Phase 1**: Set up Next.js, Tailwind, shadcn/ui
 3. **Phase 3**: Define Prisma schema
 4. **Phase 4**: Implement seed data
 5. **Phase 5**: Implement finance calculations

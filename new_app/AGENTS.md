@@ -18,7 +18,7 @@ new_app/
 ├── tsconfig.json           # TypeScript configuration
 ├── .env.example            # Environment variable template
 ├── README.md               # Project overview and setup
-└── ROADMAP.md              # 8-phase development plan
+└── ROADMAP.md              # phased development plan
 ```
 
 For detailed explanations of each folder, see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
@@ -162,7 +162,7 @@ components/copilot/ (display AI response)
 
 1. **From shadcn/ui:**
    ```bash
-   npx shadcn-ui@latest add component-name
+   npx shadcn@latest add component-name
    ```
    This creates `components/ui/component-name.tsx`
 
@@ -328,7 +328,7 @@ interface SavingsPlan {
 
 **Next tasks:** Move to Phase 1
 
-### Phase 1: Translate UI Mockups
+### Phase 2: Translate UI Mockups
 - Implement React components from Google Stitch design
 - Build dashboard layout
 - Create navigation
@@ -347,7 +347,7 @@ npm run dev          # Test components in browser
 npm run lint         # Check code quality
 ```
 
-### Phase 2: Scaffold Application
+### Phase 1: Scaffold Application
 - Set up Next.js configuration
 - Configure Tailwind CSS
 - Install and configure shadcn/ui
@@ -694,7 +694,7 @@ echo $LLM_API_KEY      # Bash
 
 - [README.md](README.md) — Setup instructions and quick start
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — Detailed folder structure and patterns
-- [docs/phases/ROADMAP.md](docs/phases/ROADMAP.md) — 8-phase development plan with acceptance criteria
+- [docs/phases/ROADMAP.md](docs/phases/ROADMAP.md) — phased development plan with acceptance criteria
 - [docs/design/DESIGN.md](docs/design/DESIGN.md) — Design system and UI tokens
 - [.env.example](.env.example) — Environment variable reference
 
