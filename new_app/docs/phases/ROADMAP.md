@@ -151,48 +151,7 @@ Confirm the initial working feature set:
 
 ---
 
-# Phase 1 — Translate the Google Stitch Design
-
-## Objective
-
-Turn the Google Stitch output into a reusable responsive frontend.
-
-## Tasks
-
-- Save/export Stitch references.
-- Recreate the design using:
-  - Next.js
-  - TypeScript
-  - Tailwind CSS
-  - shadcn/ui
-  - Lucide React
-  - Recharts
-- Use mock values initially.
-- Build reusable layout and UI components.
-- Preserve desktop and mobile responsiveness.
-
-## Suggested Pages
-
-```text
-/
-├── Overview
-├── Transactions
-├── Insights
-└── Goals
-```
-
-## Acceptance Criteria
-
-- Application visually matches the approved Stitch design.
-- Navigation works.
-- Main pages render.
-- Dashboard is responsive.
-- No database or AI integration is required yet.
-- `npm run build` succeeds.
-
----
-
-# Phase 2 — Scaffold the Application
+# Phase 1 — Scaffold the Application
 
 ## Objective
 
@@ -258,6 +217,47 @@ new app/
 - `npm run dev` starts the app.
 - `npm run build` succeeds.
 - The repository structure matches the documented architecture.
+
+---
+
+# Phase 2 — Translate the Google Stitch Design
+
+## Objective
+
+Turn the Google Stitch output into a reusable responsive frontend.
+
+## Tasks
+
+- Save/export Stitch references.
+- Recreate the design using:
+  - Next.js
+  - TypeScript
+  - Tailwind CSS
+  - shadcn/ui
+  - Lucide React
+  - Recharts
+- Use mock values initially.
+- Build reusable layout and UI components.
+- Preserve desktop and mobile responsiveness.
+
+## Suggested Pages
+
+```text
+/
+├── Overview
+├── Transactions
+├── Insights
+└── Goals
+```
+
+## Acceptance Criteria
+
+- Application visually matches the approved Stitch design.
+- Navigation works.
+- Main pages render.
+- Dashboard is responsive.
+- No database or AI integration is required yet.
+- `npm run build` succeeds.
 
 ---
 
